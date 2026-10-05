@@ -9,6 +9,8 @@ import HistoryPage from './pages/HistoryPage'
 import ReviewPage from './pages/ReviewPage'
 import SupportPage from './pages/SupportPage'
 
+const clean = (t?: string | null) => (t ?? '').replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/\s+/g, ' ').trim()
+
 const pages: Record<string, ComponentType> = {
   Dashboard: DashboardPage,
   'Groups & Trips': GroupsPage,
@@ -38,7 +40,7 @@ export default function App() {
 
   useEffect(() => {
     root.current?.querySelectorAll('[data-name="Nav"] > [data-name="Link"]').forEach((el) => {
-      el.classList.toggle('is-active', el.textContent?.trim() === page)
+      el.classList.toggle('is-active', clean(el.textContent) === page)
     })
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [page])
@@ -53,13 +55,13 @@ export default function App() {
     const target = e.target as HTMLElement
     const nav = target.closest('[data-name="Nav"] > [data-name="Link"]')
     if (nav) {
-      const label = nav.textContent?.trim() ?? ''
+      const label = clean(nav.textContent)
       if (pages[label]) setPage(label)
       return
     }
     const btn = target.closest('[data-name="Button"], [data-name="Button:shadow"], [data-name="Link"]')
     if (!btn) return
-    const label = btn.textContent?.replace(/\s+/g, ' ').trim() ?? ''
+    const label = clean(btn.textContent)
     const dest = Object.keys(shortcuts).find((k) => label.startsWith(k))
     if (dest && shortcuts[dest] !== page) setPage(shortcuts[dest])
     else if (label) setToast(label.length > 40 ? label.slice(0, 40) + '…' : label)
@@ -76,7 +78,7 @@ export default function App() {
           transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
           onAnimationComplete={() =>
             root.current?.querySelectorAll('[data-name="Nav"] > [data-name="Link"]').forEach((el) => {
-              el.classList.toggle('is-active', el.textContent?.trim() === page)
+              el.classList.toggle('is-active', clean(el.textContent) === page)
             })
           }
         >
