@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: "Plus Jakarta Sans:Regular";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans:Medium";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans:Medium Italic";
+  src: url("https://static.figma.com/font/PlusJakartaSans-Italic_wght__2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans:SemiBold";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans:Bold";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans:ExtraBold";
+  src: url("https://static.figma.com/font/PlusJakartaSans_wght__2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans:Bold";
+  src: url("https://static.figma.com/font/NotoSans-VF_3") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans Math:Regular";
+  src: url("https://static.figma.com/font/NotoSansMath-Regular_1") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans Symbols:Bold";
+  src: url("https://static.figma.com/font/NotoSansSymbols-VF_2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans Symbols2:Regular";
+  src: url("https://static.figma.com/font/NotoSansSymbols2-Regular_5") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html { scroll-behavior: smooth; }
+body { background: #f8f9fb; -webkit-font-smoothing: antialiased; }
+
+/* Interactive layer: smooth hover/press states over imported design nodes */
+.app [data-name="Button"],
+.app [data-name="Button:shadow"],
+.app [data-name="Link"] {
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease, filter 220ms ease, background-color 220ms ease;
+}
+.app [data-name="Button"]:hover,
+.app [data-name="Button:shadow"]:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 8px 20px -10px rgba(0, 81, 33, 0.45);
+}
+.app [data-name="Button"]:active,
+.app [data-name="Button:shadow"]:active { transform: translateY(0) scale(0.97); }
+
+.app [data-name="Background+Shadow"],
+.app [data-name="Overlay+Shadow"],
+.app [data-name^="Transaction"],
+.app [data-name^="Member"],
+.app [data-name^="Widget"] {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms ease;
+}
+.app [data-name="Background+Shadow"]:hover,
+.app [data-name="Overlay+Shadow"]:hover,
+.app [data-name^="Transaction"]:hover,
+.app [data-name^="Member"]:hover,
+.app [data-name^="Widget"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px -22px rgba(15, 23, 42, 0.35);
+}
+
+.app [data-name="Nav"] > [data-name="Link"] { border-radius: 10px; position: relative; }
+.app [data-name="Nav"] > [data-name="Link"]:hover { background: #eef7f0; transform: translateX(4px); }
+.app [data-name="Nav"] > [data-name="Link"].is-active { background: #e2f5e6; }
+.app [data-name="Nav"] > [data-name="Link"].is-active::before {
+  content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 3px; background: #005121;
+}
+.app [data-name="Nav"] > [data-name="Link"].is-active p { color: #005121; font-weight: 600; }
+
+.app input:focus { outline: none; }
+.app [data-name="Input"]:focus-within { box-shadow: 0 0 0 3px rgba(0, 81, 33, 0.18); transition: box-shadow 200ms ease; }
+
+.app img { transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1); }
+.app [data-name="Image"]:hover img { transform: scale(1.05); }
+
+@media (prefers-reduced-motion: reduce) {
+  .app *, .app *::before { transition: none !important; animation: none !important; }
+}
